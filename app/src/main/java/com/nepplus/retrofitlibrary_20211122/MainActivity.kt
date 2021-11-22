@@ -17,6 +17,13 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+        binding.btnLogin.setOnClickListener {
+
+            val inputEmail = binding.edtID.text.toString()
+            val inputPW = binding.edtPW.text.toString()
+
+            apiService.postRequestLogin(inputEmail,inputPW)
+        }
 
     }
 
