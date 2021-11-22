@@ -1,6 +1,6 @@
 package com.nepplus.retrofitlibrary_20211122.api
 
-import com.google.gson.Gson
+
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

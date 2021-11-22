@@ -2,8 +2,13 @@ package com.nepplus.retrofitlibrary_20211122
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.nepplus.retrofitlibrary_20211122.databinding.ActivityMainBinding
+import com.nepplus.retrofitlibrary_20211122.datas.BasicResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 lateinit var binding: ActivityMainBinding
 
@@ -22,7 +27,21 @@ class MainActivity : BaseActivity() {
             val inputEmail = binding.edtID.text.toString()
             val inputPW = binding.edtPW.text.toString()
 
-            apiService.postRequestLogin(inputEmail,inputPW)
+            apiService.postRequestLogin(inputEmail,inputPW).enqueue(object :Callback<BasicResponse>{
+                override fun onResponse(
+                    call: Call<BasicResponse>,
+                    response: Response<BasicResponse>
+                ) {
+                    val basicResponse = response.body()!!
+                    Toast.makeText(mContext, basicResponse.message, Toast.LENGTH_SHORT).show()
+
+                }
+
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                }
+
+            }
         }
 
     }
