@@ -20,9 +20,9 @@ class ServerApi {
                     .baseUrl(BASE_URL)  // 어느 서버로 접속?
                     .addConverterFactory(GsonConverterFactory.create())  // 파싱을 자동 도구로 활용할거임
                     .build()
-            } else {
-                return retrofit!!
             }
+                return retrofit!!
+
         }
     }
 }
