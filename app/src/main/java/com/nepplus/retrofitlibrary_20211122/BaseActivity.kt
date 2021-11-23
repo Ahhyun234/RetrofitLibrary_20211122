@@ -15,7 +15,7 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mContext = this
         val retrofit = ServerApi.getRetrofit()
-        apiService = retrofit.create(ServerAPIServiceInterface)
+        apiService = retrofit.create(ServerAPIServiceInterface::class.java)
     }
 
     abstract fun setupEvents()

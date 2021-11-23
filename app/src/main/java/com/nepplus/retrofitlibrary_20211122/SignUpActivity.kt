@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import com.nepplus.retrofitlibrary_20211122.databinding.ActivityMainBinding
 import com.nepplus.retrofitlibrary_20211122.databinding.ActivitySignUpBinding
@@ -16,6 +17,8 @@ class SignUpActivity : BaseActivity() {
 
     lateinit var binding: ActivitySignUpBinding
 
+    var isDupeOk = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_sign_up)
@@ -25,6 +28,15 @@ class SignUpActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        binding.edtEmail.addTextChangedListener {
+
+            Log.d("입력내용",it.toString())
+
+            binding.txtEmailCheckResult.text = "이메일 중복검사를 해주세요"
+            isDupeOk = false
+        }
+
 
         binding.btnEmailCheck.setOnClickListener {
 
@@ -38,9 +50,11 @@ class SignUpActivity : BaseActivity() {
 
                     if(response.isSuccessful){
                         binding.txtEmailCheckResult.text = "사용해도 좋은 이메일"
+                        isDupeOk = true
                     }
                     else{
                         binding.txtEmailCheckResult.text= " 다시 검사해주세요"
+                        isDupeOk = false
                     }
 
                 }
@@ -53,6 +67,11 @@ class SignUpActivity : BaseActivity() {
 
         }
         binding.btnSignUp.setOnClickListener {
+
+            if (!isDupeOk){
+                Toast.makeText(mContext, "이메일 중복검사를 해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val email = binding.edtEmail.text.toString()
             val password = binding.edtPW.text.toString()
