@@ -6,7 +6,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
-import com.nepplus.retrofitlibrary_20211122.databinding.ActivityMainBinding
 import com.nepplus.retrofitlibrary_20211122.databinding.ActivitySignUpBinding
 import com.nepplus.retrofitlibrary_20211122.datas.BasicResponse
 import retrofit2.Call

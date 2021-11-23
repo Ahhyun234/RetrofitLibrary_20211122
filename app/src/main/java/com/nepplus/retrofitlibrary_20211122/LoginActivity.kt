@@ -1,24 +1,23 @@
 package com.nepplus.retrofitlibrary_20211122
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.nepplus.retrofitlibrary_20211122.databinding.ActivityMainBinding
+import com.nepplus.retrofitlibrary_20211122.databinding.ActivityLoginBinding
 import com.nepplus.retrofitlibrary_20211122.datas.BasicResponse
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-lateinit var binding: ActivityMainBinding
+lateinit var binding: ActivityLoginBinding
 
-class MainActivity : BaseActivity() {
+class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         setupEvents()
         setValues()

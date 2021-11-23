@@ -3,6 +3,7 @@ package com.nepplus.retrofitlibrary_20211122
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.nepplus.retrofitlibrary_20211122.api.ServerAPIServiceInterface
 import com.nepplus.retrofitlibrary_20211122.api.ServerApi
 
 abstract class BaseActivity : AppCompatActivity() {
