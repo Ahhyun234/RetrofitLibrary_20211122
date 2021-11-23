@@ -9,13 +9,13 @@ abstract class BaseActivity : AppCompatActivity() {
 
     lateinit var mContext: Context
 
-    lateinit var apiService : ServerAPIService
+    lateinit var apiService : ServerAPIServiceInterface
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this
         val retrofit = ServerApi.getRetrofit()
-        apiService = retrofit.create(ServerAPIService)
+        apiService = retrofit.create(ServerAPIServiceInterface)
     }
 
     abstract fun setupEvents()

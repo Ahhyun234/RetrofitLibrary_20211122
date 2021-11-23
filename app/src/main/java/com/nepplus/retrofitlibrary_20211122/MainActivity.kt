@@ -45,7 +45,12 @@ class MainActivity : BaseActivity() {
                 ) {
                     if (response.isSuccessful){
                         val basicResponse = response.body()!!
-                        Toast.makeText(mContext, basicResponse.message, Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(mContext, basicResponse.message, Toast.LENGTH_SHORT).show()
+
+//                        추가 파싱 // ~님 환영합니다.
+                        val userNickname = basicResponse.data.user.nickname
+
+                        Toast.makeText(mContext, "${userNickname}님 환영합니다.", Toast.LENGTH_SHORT).show()
                     }
                     else{
                         val errorJson = JSONObject(response.errorBody()!!.string())
