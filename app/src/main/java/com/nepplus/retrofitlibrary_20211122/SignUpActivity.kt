@@ -128,7 +128,7 @@ class SignUpActivity : BaseActivity() {
                             val signUpUserNickname = br.data.user.nickname
                             Toast.makeText(
                                 mContext,
-                                "${signUpUserNickname}님 가입을 환영합니다.",
+                                "${signUpUserNickname}님 가입을 환영합니다!",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
