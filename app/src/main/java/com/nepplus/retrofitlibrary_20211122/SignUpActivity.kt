@@ -25,6 +25,33 @@ class SignUpActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        binding.btnEmailCheck.setOnClickListener {
+
+            val email = binding.edtEmail.text.toString()
+
+            apiService.getRequestDuplicatedCheck("email",email).enqueue(object :Callback<BasicResponse>{
+                override fun onResponse(
+                    call: Call<BasicResponse>,
+                    response: Response<BasicResponse>
+                ) {
+
+                    if(response.isSuccessful){
+                        binding.txtEmailCheckResult.text = "사용해도 좋은 이메일"
+                    }
+                    else{
+                        binding.txtEmailCheckResult.text= " 다시 검사해주세요"
+                    }
+
+                }
+
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                }
+
+            })
+
+        }
         binding.btnSignUp.setOnClickListener {
 
             val email = binding.edtEmail.text.toString()

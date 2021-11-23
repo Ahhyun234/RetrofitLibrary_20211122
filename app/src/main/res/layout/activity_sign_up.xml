@@ -16,11 +16,32 @@
             android:layout_height="wrap_content"
             android:text="이메일 주소"/>
 
-        <EditText
-            android:id="@+id/edtEmail"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="이에일 주소"/>
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="이에일 주소"/>
+
+            <Button
+                android:id="@+id/btnEmailCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="중복확인"/>
+
+        </LinearLayout>
+
+       <TextView
+           android:id="@+id/txtEmailCheckResult"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="이메일 중복 검사를 해주세요"/>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,6 +52,7 @@
             android:id="@+id/edtPW"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:hint="비밀번호"/>
 
         <TextView
@@ -43,6 +65,7 @@
             android:layout_width="match_parent"
             android:singleLine="true"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:hint="닉네임"/>
 
         <Button
