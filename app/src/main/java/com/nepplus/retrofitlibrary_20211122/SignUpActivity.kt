@@ -29,6 +29,15 @@ class SignUpActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+//        1. 비밀번호 타이핑 하는 이벤트 => 8글자 이상인지 아닌지 검사
+//        검사 결과를 txtPwCheckResult1에 반영
+
+//        2. 비밀번호 확인 타이핑 이벤트 => 첫 비밀번호 입력과 같은지?
+//        검사 결과를 txtPwCheckResult1에 반영
+
+//        3. 회원 가입 API 호출하기 전에
+//        위 1, 2 번을 통과 해야지만 서버 호출하는 것으로 변경 -> 미통과시 토스트 + 함수 강제 종료
+
         binding.edtEmail.addTextChangedListener {
 
             Log.d("입력내용",it.toString())

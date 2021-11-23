@@ -46,6 +46,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:text="비밀번호"/>
 
         <EditText
@@ -53,11 +54,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="비밀번호"/>
+            android:hint="비밀번호 8자리 이상"/>
+
+        <TextView
+            android:id="@+id/txtPwCheckResult1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호가 8자리 이상이어야 합니다."/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="비밀번호확인"/>
+
+        <EditText
+            android:id="@+id/edtRepeatPW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="비밀번호를 다시 입력해주세요"/>
+
+        <TextView
+            android:id="@+id/txtPwCheckResult2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호가 서로 일치해야 합니다."/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:text="닉네임"/>
 
         <EditText
