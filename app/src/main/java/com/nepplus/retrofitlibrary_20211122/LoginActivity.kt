@@ -50,13 +50,28 @@ class LoginActivity : BaseActivity() {
                         getMyInfoFromKakao()
 
                     }
-                    else{
-                                       }
+
                 }
 
             }
             else{
 //                앱이 안 깔려 있는 상황
+                UserApiClient.instance.loginWithKakaoAccount(mContext) { token, error ->
+
+                    if (error != null) {
+                        Log.e("카톡로그인", "로그인 실패")
+                    }
+                    else if (token != null) {
+
+                        Log.e("카톡로그인", "로그인 성공")
+                        Log.e("카톡로그인", token.accessToken)
+
+                        getMyInfoFromKakao()
+
+                    }
+
+                }
+
             }
 
         }
@@ -129,6 +144,27 @@ class LoginActivity : BaseActivity() {
                             Log.d("내 정보 요청", jsonObj.toString())
 //                            우리 앱 서버에 서버 API 요청 해야 함
 
+                            val name = jsonObj!!.getString("name")
+                            val id = jsonObj.getString("id")
+
+                            apiService.postRequestSocialLogin("facebook",id,name).enqueue(object : Callback<BasicResponse>{
+                                override fun onResponse(
+                                    call: Call<BasicResponse>,
+                                    response: Response<BasicResponse>
+                                ) {
+                                    if(response.isSuccessful){
+                                        val br = response.body()!!
+                                        Toast.makeText(mContext, "${br.data.user.nickname}님 환영합니다.", Toast.LENGTH_SHORT).show()
+                                    }
+
+                                }
+
+                                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                                }
+
+                            })
+
                         }
 
                     })
@@ -180,6 +216,23 @@ class LoginActivity : BaseActivity() {
                          "\n회원번호: ${user.id}" +
                          "\n이메일: ${user.kakaoAccount?.email}" +
                          "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" )
+
+                 apiService.postRequestSocialLogin("kakao", user.id.toString(), user.kakaoAccount?.profile?.nickname!!).enqueue(object :Callback<BasicResponse>{
+                     override fun onResponse(
+                         call: Call<BasicResponse>,
+                         response: Response<BasicResponse>
+                     ) {
+                         if (response.isSuccessful){
+                             val br = response.body()!!
+                             Toast.makeText(mContext, "${br.data.user.nickname}님 환영합니다.", Toast.LENGTH_SHORT).show()
+                         }
+                     }
+
+                     override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                     }
+
+                 })
              }
          }
      }

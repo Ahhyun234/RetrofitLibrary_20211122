@@ -33,4 +33,13 @@ interface ServerAPIServiceInterface {
         @Query("value") value: String,
 
         ): Call<BasicResponse>
+
+//    소셜 로그인
+    @FormUrlEncoded
+    @POST("/user/social")
+    fun postRequestSocialLogin(
+    @Field("provider") provider: String,
+    @Field("uid") uid: String,
+    @Field("nick_name") nick_name:String,
+    ): Call<BasicResponse>
 }
