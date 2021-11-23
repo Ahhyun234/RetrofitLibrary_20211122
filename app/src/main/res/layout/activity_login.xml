@@ -52,22 +52,52 @@
             android:text="소셜 로그인"/>
 
         <LinearLayout
-            android:id="@+id/btnFaceBookLogin"
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/img"/>
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/btnFaceBookLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="페이스북 로그인"/>
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="페이스북 로그인"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnKakaotalkLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="카카오톡 로그인"/>
+
+            </LinearLayout>
 
 
 

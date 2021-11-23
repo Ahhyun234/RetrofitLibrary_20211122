@@ -1,6 +1,7 @@
 package com.nepplus.retrofitlibrary_20211122
 
 import android.app.Application
+import com.kakao.sdk.common.KakaoSdk
 
 class GlobalApplication : Application() {
 
