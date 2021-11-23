@@ -3,6 +3,7 @@ package com.nepplus.retrofitlibrary_20211122
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.nepplus.retrofitlibrary_20211122.databinding.ActivityMainBinding
 import com.nepplus.retrofitlibrary_20211122.databinding.ActivitySignUpBinding
@@ -39,6 +40,8 @@ class SignUpActivity : BaseActivity() {
                         val br = response.body()!!
 
                         Log.d("가입자 토큰",br.data.token)
+                        val signUpUserNickname = br.data.user.nickname
+                        Toast.makeText(mContext, "${signUpUserNickname}님 가입을 환영합니다.", Toast.LENGTH_SHORT).show()
                     }
 
                 }
