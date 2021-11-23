@@ -36,14 +36,12 @@ class LoginActivity : BaseActivity() {
 
         binding.btnKakaotalkLogin.setOnClickListener {
 
-            if ( UserApiClient.instance.isKakaoTalkLoginAvailable(mContext)   ){
+            if (UserApiClient.instance.isKakaoTalkLoginAvailable(mContext)) {
 //                앱이 깔려있는 상황
-                UserApiClient.instance.loginWithKakaoTalk(mContext){
-                    token, error ->
+                UserApiClient.instance.loginWithKakaoTalk(mContext) { token, error ->
                     if (error != null) {
-                    Log.e("카톡 로그인", "로그인 실패")
-                }
-                    else if (token !=null){
+                        Log.e("카톡 로그인", "로그인 실패")
+                    } else if (token != null) {
 
                         Log.e("카톡 로그인", "로그인 성공")
                         Log.e("카톡 로그인", token.accessToken)
@@ -53,15 +51,13 @@ class LoginActivity : BaseActivity() {
 
                 }
 
-            }
-            else{
+            } else {
 //                앱이 안 깔려 있는 상황
                 UserApiClient.instance.loginWithKakaoAccount(mContext) { token, error ->
 
                     if (error != null) {
                         Log.e("카톡로그인", "로그인 실패")
-                    }
-                    else if (token != null) {
+                    } else if (token != null) {
 
                         Log.e("카톡로그인", "로그인 성공")
                         Log.e("카톡로그인", token.accessToken)
@@ -110,6 +106,11 @@ class LoginActivity : BaseActivity() {
 
                             Toast.makeText(mContext, "${userNickname}님 환영합니다.", Toast.LENGTH_SHORT)
                                 .show()
+
+                            val myIntent = Intent(mContext,MainActivity::class.java)
+                            startActivity(myIntent)
+                            finish()
+
                         } else {
                             val errorJson = JSONObject(response.errorBody()!!.string())
                             Log.d("에러경우", errorJson.toString())
@@ -139,35 +140,52 @@ class LoginActivity : BaseActivity() {
                     Log.d("로그인", result!!.accessToken.token)
 //                   1차 로그인 결과로 받은 accessToken을 내 정보를 받아오는데 사용
 //                     페북 API 중 내 정보 가져오기 기능 요청
-                    var graphApiRequest = GraphRequest.newMeRequest(result.accessToken, object : GraphRequest.GraphJSONObjectCallback{
-                        override fun onCompleted(jsonObj: JSONObject?, response: GraphResponse?) {
-                            Log.d("내 정보 요청", jsonObj.toString())
+                    var graphApiRequest = GraphRequest.newMeRequest(
+                        result.accessToken,
+                        object : GraphRequest.GraphJSONObjectCallback {
+                            override fun onCompleted(
+                                jsonObj: JSONObject?,
+                                response: GraphResponse?
+                            ) {
+                                Log.d("내 정보 요청", jsonObj.toString())
 //                            우리 앱 서버에 서버 API 요청 해야 함
 
-                            val name = jsonObj!!.getString("name")
-                            val id = jsonObj.getString("id")
+                                val name = jsonObj!!.getString("name")
+                                val id = jsonObj.getString("id")
 
-                            apiService.postRequestSocialLogin("facebook",id,name).enqueue(object : Callback<BasicResponse>{
-                                override fun onResponse(
-                                    call: Call<BasicResponse>,
-                                    response: Response<BasicResponse>
-                                ) {
-                                    if(response.isSuccessful){
-                                        val br = response.body()!!
-                                        Toast.makeText(mContext, "${br.data.user.nickname}님 환영합니다.", Toast.LENGTH_SHORT).show()
-                                    }
+                                apiService.postRequestSocialLogin("facebook", id, name)
+                                    .enqueue(object : Callback<BasicResponse> {
+                                        override fun onResponse(
+                                            call: Call<BasicResponse>,
+                                            response: Response<BasicResponse>
+                                        ) {
+                                            if (response.isSuccessful) {
+                                                val br = response.body()!!
+                                                Toast.makeText(
+                                                    mContext,
+                                                    "${br.data.user.nickname}님 환영합니다.",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
 
-                                }
+                                                val myIntent = Intent(mContext,MainActivity::class.java)
+                                                startActivity(myIntent)
+                                                finish()
+                                            }
 
-                                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                                        }
 
-                                }
+                                        override fun onFailure(
+                                            call: Call<BasicResponse>,
+                                            t: Throwable
+                                        ) {
 
-                            })
+                                        }
 
-                        }
+                                    })
 
-                    })
+                            }
+
+                        })
                     graphApiRequest.executeAsync()
 
                 }
@@ -206,34 +224,47 @@ class LoginActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-     fun getMyInfoFromKakao (){
-         UserApiClient.instance.me { user, error ->
-             if (error != null) {
-                 Log.e("카톡 로그인", "사용자 정보 요청 실패", error)
-             }
-             else if (user != null) {
-                 Log.i("카톡 로그인", "사용자 정보 요청 성공" +
-                         "\n회원번호: ${user.id}" +
-                         "\n이메일: ${user.kakaoAccount?.email}" +
-                         "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" )
+    fun getMyInfoFromKakao() {
+        UserApiClient.instance.me { user, error ->
+            if (error != null) {
+                Log.e("카톡 로그인", "사용자 정보 요청 실패", error)
+            } else if (user != null) {
+                Log.i(
+                    "카톡 로그인", "사용자 정보 요청 성공" +
+                            "\n회원번호: ${user.id}" +
+                            "\n이메일: ${user.kakaoAccount?.email}" +
+                            "\n닉네임: ${user.kakaoAccount?.profile?.nickname}"
+                )
 
-                 apiService.postRequestSocialLogin("kakao", user.id.toString(), user.kakaoAccount?.profile?.nickname!!).enqueue(object :Callback<BasicResponse>{
-                     override fun onResponse(
-                         call: Call<BasicResponse>,
-                         response: Response<BasicResponse>
-                     ) {
-                         if (response.isSuccessful){
-                             val br = response.body()!!
-                             Toast.makeText(mContext, "${br.data.user.nickname}님 환영합니다.", Toast.LENGTH_SHORT).show()
-                         }
-                     }
+                apiService.postRequestSocialLogin(
+                    "kakao",
+                    user.id.toString(),
+                    user.kakaoAccount?.profile?.nickname!!
+                ).enqueue(object : Callback<BasicResponse> {
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            val br = response.body()!!
+                            Toast.makeText(
+                                mContext,
+                                "${br.data.user.nickname}님 환영합니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
-                     override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                            val myIntent = Intent(mContext,MainActivity::class.java)
+                            startActivity(myIntent)
+                            finish()
+                        }
+                    }
 
-                     }
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
 
-                 })
-             }
-         }
-     }
+                    }
+
+                })
+            }
+        }
+    }
 }
