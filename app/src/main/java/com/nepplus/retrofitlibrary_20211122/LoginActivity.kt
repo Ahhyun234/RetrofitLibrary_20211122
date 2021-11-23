@@ -99,6 +99,8 @@ class LoginActivity : BaseActivity() {
                     var graphApiRequest = GraphRequest.newMeRequest(result.accessToken, object : GraphRequest.GraphJSONObjectCallback{
                         override fun onCompleted(jsonObj: JSONObject?, response: GraphResponse?) {
                             Log.d("내 정보 요청", jsonObj.toString())
+//                            우리 앱 서버에 서버 API 요청 해야 함
+
                         }
 
                     })
