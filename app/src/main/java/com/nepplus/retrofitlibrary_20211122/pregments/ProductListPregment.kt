@@ -1,6 +1,7 @@
 package com.nepplus.retrofitlibrary_20211122.pregments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,6 +58,13 @@ class ProductListPregment : BaseFragment() {
                 if (response.isSuccessful){
                     val br = response.body()!!
 
+                    mProductList.clear()
+                    mProductList.addAll(br.data.product)
+
+
+                    for(product in br.data.product){
+                        Log.d("상품명", product.name )
+                    }
                 }
             }
 
