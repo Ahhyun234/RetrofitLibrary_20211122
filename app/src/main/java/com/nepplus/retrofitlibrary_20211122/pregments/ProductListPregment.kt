@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.nepplus.retrofitlibrary_20211122.BaseActivity
@@ -22,6 +23,8 @@ class ProductListPregment : BaseFragment() {
 
     lateinit var binding: ProductListFragmentBinding
     val mProductList = ArrayList<ProductData>()
+
+    lateinit var mProductAdapter: ProductAdapter
 
     override fun onCreateView(    //xml을 끌어와주는 함수
         inflater: LayoutInflater,
@@ -47,8 +50,9 @@ class ProductListPregment : BaseFragment() {
 
     override fun setValues() {
 
-
         getProductListFromServer()
+
+        mProductAdapter = ProductAdapter(mContext, R.layout.fragment_product_list_item,f)
     }
 
     fun getProductListFromServer(){
@@ -61,7 +65,9 @@ class ProductListPregment : BaseFragment() {
                     mProductList.clear()
                     mProductList.addAll(br.data.product)
 
+                    mProductAdapter.notifyDataSetChanged()
 
+//for문이 여기 맞나?
                     for(product in br.data.product){
                         Log.d("상품명", product.name )
                     }
