@@ -11,7 +11,7 @@ import com.nepplus.retrofitlibrary_20211122.R
 import com.nepplus.retrofitlibrary_20211122.databinding.MyprofileFragmentBinding
 import com.nepplus.retrofitlibrary_20211122.utils.ContextUtil
 
-class MyProfilePregment : Fragment() {
+class MyProfilePregment : BaseFragment() {
 
     lateinit var binding:MyprofileFragmentBinding
 
@@ -26,7 +26,16 @@ class MyProfilePregment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-         Log.d("토큰",ContextUtil.getToken(requireContext()))
+//         Log.d("토큰",ContextUtil.getToken(mContext))
+        setupEvents()
+        setValues()
+    }
+
+    override fun setupEvents() {
+
+    }
+
+    override fun setValues() {
 
     }
 }
