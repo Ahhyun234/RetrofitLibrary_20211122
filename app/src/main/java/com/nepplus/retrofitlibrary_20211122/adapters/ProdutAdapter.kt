@@ -29,11 +29,14 @@ class ProdutAdapter(val mComtext: Context, resId:Int , val mList: List<ProductDa
         val txtProductName = row.findViewById<TextView>(R.id.txtProductName)
         val imgStoreLogo = row.findViewById<ImageView>(R.id.imgStoreLogo)
         val txtStoreName = row.findViewById<TextView>(R.id.txtStoreName)
+        val txtCategoryName = row.findViewById<TextView>(R.id.txtCategoryName)
+
+        txtCategoryName.text = "(${data.smallCategory.name})"
 
         txtProductName.text = data.name
         txtStoreName.text = data.store.name
 
-        Glide.with(mComtext).load(data.store.logoUrl).into(imgStoreLogo)
+        Glide.with(mComtext).load(data.store.logo_url).into(imgStoreLogo)
 
 
         return row

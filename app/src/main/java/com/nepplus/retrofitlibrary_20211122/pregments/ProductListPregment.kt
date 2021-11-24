@@ -52,7 +52,8 @@ class ProductListPregment : BaseFragment() {
 
         getProductListFromServer()
 
-        mProductAdapter = ProductAdapter(mContext, R.layout.fragment_product_list_item,f)
+        mProductAdapter = ProductAdapter(mContext, R.layout.fragment_product_list_item,mProductList)
+        binding.productListView.adapter = mProductAdapter
     }
 
     fun getProductListFromServer(){
@@ -67,10 +68,7 @@ class ProductListPregment : BaseFragment() {
 
                     mProductAdapter.notifyDataSetChanged()
 
-//for문이 여기 맞나?
-                    for(product in br.data.product){
-                        Log.d("상품명", product.name )
-                    }
+
                 }
             }
 
