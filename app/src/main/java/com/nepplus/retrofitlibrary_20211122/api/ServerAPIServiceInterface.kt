@@ -42,4 +42,12 @@ interface ServerAPIServiceInterface {
     @Field("uid") uid: String,
     @Field("nick_name") nick_name:String,
     ): Call<BasicResponse>
+
+
+//    내 정보 조회 / get방식 / 토큰 필요 (임시 방안)
+
+    @GET("/user")
+    fun getRequestMyinfo(
+        @Header("X-Http-Token") token: String
+    ): Call<BasicResponse>
 }
