@@ -20,6 +20,7 @@
             android:id="@+id/edtID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:hint="아이디입력" />
 
         <TextView
@@ -32,6 +33,8 @@
             android:id="@+id/edtPW"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
+
             android:hint="비밀번호 입력" />
 
         <Button
