@@ -13,6 +13,7 @@ import com.facebook.login.LoginResult
 import com.kakao.sdk.user.UserApiClient
 import com.nepplus.retrofitlibrary_20211122.databinding.ActivityLoginBinding
 import com.nepplus.retrofitlibrary_20211122.datas.BasicResponse
+import com.nepplus.retrofitlibrary_20211122.utils.ContextUtil
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -108,9 +109,9 @@ class LoginActivity : BaseActivity() {
                                 .show()
 
 //                            /////////토큰값 추출 -> 기기에 저장(SharedPreferences)/////////////
+                            ContextUtil.setToken(mContext, basicResponse.data.token)
 
-
-                            val myIntent = Intent(mContext,MainActivity::class.java)
+                            val myIntent = Intent(mContext, MainActivity::class.java)
                             startActivity(myIntent)
                             finish()
 
@@ -170,7 +171,12 @@ class LoginActivity : BaseActivity() {
                                                     Toast.LENGTH_SHORT
                                                 ).show()
 
-                                                val myIntent = Intent(mContext,MainActivity::class.java)
+
+                                                /////////토큰값 추출 -> 기기에 저장(SharedPreferences)/////////////
+                                                ContextUtil.setToken(mContext, br.data.token)
+
+                                                val myIntent =
+                                                    Intent(mContext, MainActivity::class.java)
                                                 startActivity(myIntent)
                                                 finish()
                                             }
@@ -256,7 +262,10 @@ class LoginActivity : BaseActivity() {
                                 Toast.LENGTH_SHORT
                             ).show()
 
-                            val myIntent = Intent(mContext,MainActivity::class.java)
+                            /////////토큰값 추출 -> 기기에 저장(SharedPreferences)/////////////
+                            ContextUtil.setToken(mContext, br.data.token)
+
+                            val myIntent = Intent(mContext, MainActivity::class.java)
                             startActivity(myIntent)
                             finish()
                         }
