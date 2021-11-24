@@ -107,6 +107,9 @@ class LoginActivity : BaseActivity() {
                             Toast.makeText(mContext, "${userNickname}님 환영합니다.", Toast.LENGTH_SHORT)
                                 .show()
 
+//                            /////////토큰값 추출 -> 기기에 저장(SharedPreferences)/////////////
+
+
                             val myIntent = Intent(mContext,MainActivity::class.java)
                             startActivity(myIntent)
                             finish()
