@@ -1,10 +1,11 @@
 package com.nepplus.retrofitlibrary_20211122.datas
 
-class ProductData(
+class StoreData(
 
     var id : Int,
     var name : String,
 
-    var store: StoreData
+    @SerializeName ("logoUrl")
+    var logoUrl =
 ) {
 }
