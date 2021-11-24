@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.nepplus.retrofitlibrary_20211122.R
 import com.nepplus.retrofitlibrary_20211122.datas.ProductData
 
-class ProdutAdapter(val mComtext: Context, resId:Int , val mList: List<ProductData>):ArrayAdapter<ProductData>(mComtext,resId,mList) {
+class ProductAdapter(val mComtext: Context, resId:Int , val mList: List<ProductData>):ArrayAdapter<ProductData>(mComtext,resId,mList) {
 
     val mInflater = LayoutInflater.from(mComtext)
 
@@ -26,17 +26,18 @@ class ProdutAdapter(val mComtext: Context, resId:Int , val mList: List<ProductDa
         val row = tempRow!!
 
         val data = mList[position]
+
         val txtProductName = row.findViewById<TextView>(R.id.txtProductName)
         val imgStoreLogo = row.findViewById<ImageView>(R.id.imgStoreLogo)
         val txtStoreName = row.findViewById<TextView>(R.id.txtStoreName)
         val txtCategoryName = row.findViewById<TextView>(R.id.txtCategoryName)
 
-        txtCategoryName.text = "(${data.smallCategory.name})"
+        txtCategoryName.text = "(${data.smallcategory.name})"
 
         txtProductName.text = data.name
         txtStoreName.text = data.store.name
 
-        Glide.with(mComtext).load(data.store.logo_url).into(imgStoreLogo)
+        Glide.with(mComtext).load(data.store.logoURL).into(imgStoreLogo)
 
 
         return row

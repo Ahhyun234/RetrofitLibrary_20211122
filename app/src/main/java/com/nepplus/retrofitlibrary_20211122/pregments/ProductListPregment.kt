@@ -1,18 +1,13 @@
 package com.nepplus.retrofitlibrary_20211122.pregments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import com.nepplus.retrofitlibrary_20211122.BaseActivity
 import com.nepplus.retrofitlibrary_20211122.R
-import com.nepplus.retrofitlibrary_20211122.binding
+import com.nepplus.retrofitlibrary_20211122.adapters.ProductAdapter
 import com.nepplus.retrofitlibrary_20211122.databinding.ProductListFragmentBinding
-import com.nepplus.retrofitlibrary_20211122.databinding.ReviewListPregmentListBinding
 import com.nepplus.retrofitlibrary_20211122.datas.BasicResponse
 import com.nepplus.retrofitlibrary_20211122.datas.ProductData
 import retrofit2.Call

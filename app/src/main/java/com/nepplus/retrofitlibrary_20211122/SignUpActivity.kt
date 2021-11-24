@@ -16,9 +16,9 @@ class SignUpActivity : BaseActivity() {
 
     lateinit var binding: ActivitySignUpBinding
 
-    var isDupeOk = true
-    var isPasswordLenthOk = true
-    var isPasswordSame = true
+    var isDupeOk = false
+    var isPasswordLenthOk = false
+    var isPasswordSame = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +60,7 @@ class SignUpActivity : BaseActivity() {
 
         binding.edtEmail.addTextChangedListener {
 
-            Log.d("입력내용", it.toString())
+//            Log.d("입력내용", it.toString())
 
             binding.txtEmailCheckResult.text = "이메일 중복검사를 해주세요"
             isDupeOk = false
@@ -113,9 +113,9 @@ class SignUpActivity : BaseActivity() {
 
             val email = binding.edtEmail.text.toString()
             val password = binding.edtPW.text.toString()
-            val nicname = binding.edtNickname.text.toString()
+            val nickname = binding.edtNickname.text.toString()
 
-            apiService.putRequestSignUp(email, password, nicname)
+            apiService.putRequestSignUp(email, password, nickname)
                 .enqueue(object : Callback<BasicResponse> {
                     override fun onResponse(
                         call: Call<BasicResponse>,
@@ -131,6 +131,8 @@ class SignUpActivity : BaseActivity() {
                                 "${signUpUserNickname}님 가입을 환영합니다!",
                                 Toast.LENGTH_SHORT
                             ).show()
+
+                            finish()
                         }
 
                     }

@@ -21,10 +21,12 @@ import retrofit2.Response
 import java.security.MessageDigest
 import java.util.*
 
+class LoginActivity : BaseActivity() {
+
 lateinit var binding: ActivityLoginBinding
 lateinit var callbackManager: CallbackManager
 
-class LoginActivity : BaseActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)

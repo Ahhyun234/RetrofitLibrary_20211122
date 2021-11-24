@@ -5,7 +5,7 @@ class ProductData(
     var id : Int,
     var name : String,
 
-    var store: StoreData
+    var store: StoreData,
     @SerializedName("small_category")
     var smallcategory : SmallcategoryData
 
